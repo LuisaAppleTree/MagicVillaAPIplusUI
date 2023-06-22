@@ -4,6 +4,7 @@ using MagicVilla_API.Datos;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MagicVilla_API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230621165210_AgregarNumeroVillaTabla")]
+    partial class AgregarNumeroVillaTabla
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -73,8 +76,8 @@ namespace MagicVilla_API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<float>("MetrosCuadrados")
-                        .HasColumnType("real");
+                    b.Property<double>("MetrosCuadrados")
+                        .HasColumnType("float");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
@@ -83,8 +86,8 @@ namespace MagicVilla_API.Migrations
                     b.Property<int>("Ocupantes")
                         .HasColumnType("int");
 
-                    b.Property<float>("Tarifa")
-                        .HasColumnType("real");
+                    b.Property<double>("Tarifa")
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
@@ -96,26 +99,26 @@ namespace MagicVilla_API.Migrations
                             Id = 1,
                             Amenidad = "Equitación, cata de vinos",
                             Detalle = "Villa con viñedos en Touluse",
-                            FechaActualizacion = new DateTime(2023, 6, 22, 14, 34, 25, 388, DateTimeKind.Local).AddTicks(8011),
-                            FechaCreacion = new DateTime(2023, 6, 22, 14, 34, 25, 388, DateTimeKind.Local).AddTicks(7997),
+                            FechaActualizacion = new DateTime(2023, 6, 21, 10, 52, 10, 688, DateTimeKind.Local).AddTicks(4675),
+                            FechaCreacion = new DateTime(2023, 6, 21, 10, 52, 10, 688, DateTimeKind.Local).AddTicks(4660),
                             ImagenUrl = "",
-                            MetrosCuadrados = 70f,
+                            MetrosCuadrados = 70.0,
                             Nombre = "Villa Francesa",
                             Ocupantes = 12,
-                            Tarifa = 500f
+                            Tarifa = 500.0
                         },
                         new
                         {
                             Id = 2,
                             Amenidad = "Nado en aguas heladas, bajo el cálido sol de la costa",
                             Detalle = "Villa con vista al cristalino mar",
-                            FechaActualizacion = new DateTime(2023, 6, 22, 14, 34, 25, 388, DateTimeKind.Local).AddTicks(8013),
-                            FechaCreacion = new DateTime(2023, 6, 22, 14, 34, 25, 388, DateTimeKind.Local).AddTicks(8013),
+                            FechaActualizacion = new DateTime(2023, 6, 21, 10, 52, 10, 688, DateTimeKind.Local).AddTicks(4677),
+                            FechaCreacion = new DateTime(2023, 6, 21, 10, 52, 10, 688, DateTimeKind.Local).AddTicks(4677),
                             ImagenUrl = "",
-                            MetrosCuadrados = 40f,
+                            MetrosCuadrados = 40.0,
                             Nombre = "Villa Mediterranea",
                             Ocupantes = 8,
-                            Tarifa = 800f
+                            Tarifa = 800.0
                         });
                 });
 
