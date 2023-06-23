@@ -1,4 +1,5 @@
 ﻿using MagicVillaUI.MVVM.Model;
+using MagicVillaUI.MVVM.ViewModel;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -26,7 +27,6 @@ namespace MagicVillaUI
         HttpClient client = new HttpClient();
         public MainWindow()
         {
-            HttpClientHandler handler = new HttpClientHandler();
             client.BaseAddress = new Uri("https://localhost:7100/api/");
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(
@@ -74,7 +74,7 @@ namespace MagicVillaUI
         {
             try
             {
-                await client.PostAsJsonAsync("villa", villa);
+                await client.PostAsJsonAsync("Villa", villa);
             }
             catch (Exception ex)
             {
@@ -93,7 +93,7 @@ namespace MagicVillaUI
             try
             {
                 lblMensaje.Content = "";
-                var respuesta = await client.GetStringAsync("villa");
+                var respuesta = await client.GetStringAsync("Villa");
                 var villas = JsonConvert.DeserializeObject<List<Villa>>(respuesta);
                 dgVilla.DataContext = villas;
             }
@@ -122,7 +122,7 @@ namespace MagicVillaUI
         {
             try
             {
-                await client.PutAsJsonAsync("villa/" + villa.Id, villa);
+                await client.PutAsJsonAsync("Villa/" + villa.Id, villa);
             }
             catch (Exception ex)
             {
@@ -142,7 +142,7 @@ namespace MagicVillaUI
         {
             try
             {
-                await client.DeleteAsync("Villa/" + villaId);
+                await client.DeleteAsync("Villa/id?id=" + villaId);
             }
             catch (Exception ex)
             {
@@ -154,8 +154,12 @@ namespace MagicVillaUI
         private void btnMostrarVillaID(object sender, RoutedEventArgs e)
         {
             txtID.Visibility = Visibility.Visible;
-            var id = int.Parse(txtID.Text);
-            this.GetVilla(id);
+            if(txtID.Text != (0).ToString())
+            {
+                var id = int.Parse(txtID.Text);
+                this.GetVilla(id);
+            }
+            else { MessageBox.Show("El ID no puede ser 0."); };
         }
 
         private async void GetVilla(int villaId)
@@ -163,13 +167,8 @@ namespace MagicVillaUI
             Villa villaporId = new Villa();
             try
             {
-                //lblMensaje.Content = "";
-                //var respuesta = await client.GetStringAsync("villa");
-                //var villas = JsonConvert.DeserializeObject<List<Villa>>(respuesta);
-                //dgVilla.DataContext = villas;
-
                 lblMensaje.Content = "";
-                var respuesta = await client.GetStringAsync("Villa/" + villaId);
+                var respuesta = await client.GetStringAsync("Villa/id?id=" + villaId);
                 var villa = JsonConvert.DeserializeObject<Villa>(respuesta);
                 dgVilla.DataContext = villa;
             }
@@ -178,6 +177,5 @@ namespace MagicVillaUI
                 MessageBox.Show("Error: " + ex.Message.ToString());
             }
         }
-
     }
 }

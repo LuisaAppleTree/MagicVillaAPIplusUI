@@ -110,24 +110,26 @@
                 Width="206"
                 Click="btnGuardarVilla_Click" />
         <DataGrid x:Name="dgVilla"
-                  Margin="262,95,26,10">
+                  Margin="262,95,26,10"
+                  x:FieldModifier="public"
+                  AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID Villa"
-                                    Binding="{Binding Path=Id}" />
+                                    Binding="{Binding Path=Id}"/>
                 <DataGridTextColumn Header="Nombre Villa"
-                                    Binding="{Binding Path=Nombre}" />
+                                    Binding="{Binding Path=Nombre}"/>
                 <DataGridTextColumn Header="Detalle"
-                                    Binding="{Binding Path=Detalle}" />
+                                    Binding="{Binding Path=Detalle}"/>
                 <DataGridTextColumn Header="Tarifa"
-                                    Binding="{Binding Path=Tarifa}" />
+                                    Binding="{Binding Path=Tarifa}"/>
                 <DataGridTextColumn Header="Ocupantes"
-                                    Binding="{Binding Path=Ocupantes}" />
+                                    Binding="{Binding Path=Ocupantes}"/>
                 <DataGridTextColumn Header="m2"
-                                    Binding="{Binding Path=MetrosCuadrados}" />
+                                    Binding="{Binding Path=MetrosCuadrados}"/>
                 <DataGridTextColumn Header="Imagen"
                                     Binding="{Binding Path=ImagenUrl}" />
                 <DataGridTextColumn Header="Amenidad"
-                                    Binding="{Binding Path=Amenidad}" />
+                                    Binding="{Binding Path=Amenidad}"/>
                 <DataGridTemplateColumn Header="Editar">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
