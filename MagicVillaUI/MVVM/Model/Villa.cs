@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MagicVillaUI.MVVM.Model
 {
-    class Villa
+    public class Villa
     {
         public int Id { get; set; }
         public string Nombre { get; set; }

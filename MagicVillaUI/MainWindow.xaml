@@ -12,11 +12,11 @@
         <Label  x:Name="lblNombreVilla1"
                 Content="Nombre Villa:"
                 HorizontalAlignment="Left"
-                Margin="20,95,0,0"
+                Margin="20,94,0,0"
                 VerticalAlignment="Top" />
         <TextBox x:Name="txtNombreVilla"
                  HorizontalAlignment="Left"
-                 Margin="116,99,0,0"
+                 Margin="116,98,0,0"
                  TextWrapping="Wrap"
                  Text=""
                  VerticalAlignment="Top"
@@ -24,11 +24,11 @@
         <Label  x:Name="lblDetalle"
                 Content="Detalle:"
                 HorizontalAlignment="Left"
-                Margin="20,126,0,0"
+                Margin="20,125,0,0"
                 VerticalAlignment="Top" />
         <TextBox x:Name="txtDetalle"
                  HorizontalAlignment="Left"
-                 Margin="116,130,0,0"
+                 Margin="116,129,0,0"
                  TextWrapping="Wrap"
                  Text=""
                  VerticalAlignment="Top"
@@ -36,11 +36,11 @@
         <Label  x:Name="lblTarifa"
                 Content="Tarifa:"
                 HorizontalAlignment="Left"
-                Margin="20,157,0,0"
+                Margin="20,156,0,0"
                 VerticalAlignment="Top" />
         <TextBox x:Name="txtTarifa"
                  HorizontalAlignment="Left"
-                 Margin="116,161,0,0"
+                 Margin="116,160,0,0"
                  TextWrapping="Wrap"
                  Text=""
                  VerticalAlignment="Top"
@@ -48,11 +48,11 @@
         <Label x:Name="lblOcupantes"
                Content="Ocupantes:"
                HorizontalAlignment="Left"
-               Margin="20,188,0,0"
+               Margin="20,187,0,0"
                VerticalAlignment="Top" />
         <TextBox x:Name="txtOcupantes"
                  HorizontalAlignment="Left"
-                 Margin="116,192,0,0"
+                 Margin="116,191,0,0"
                  TextWrapping="Wrap"
                  Text=""
                  VerticalAlignment="Top"
@@ -60,12 +60,12 @@
         <Label x:Name="lblm2"
                Content="Metros Cuadrados:"
                HorizontalAlignment="Left"
-               Margin="20,220,0,0"
+               Margin="20,219,0,0"
                VerticalAlignment="Top"
                RenderTransformOrigin="-0.271,0.455" />
         <TextBox x:Name="txtm2"
                  HorizontalAlignment="Left"
-                 Margin="147,224,0,0"
+                 Margin="147,223,0,0"
                  TextWrapping="Wrap"
                  Text=""
                  VerticalAlignment="Top"
@@ -73,11 +73,11 @@
         <Label x:Name="lblImagen"
                Content="Imagen URL: "
                HorizontalAlignment="Left"
-               Margin="23,251,0,0"
+               Margin="23,250,0,0"
                VerticalAlignment="Top" />
         <TextBox x:Name="txtImagen"
                  HorizontalAlignment="Left"
-                 Margin="116,255,0,0"
+                 Margin="116,254,0,0"
                  TextWrapping="Wrap"
                  Text=""
                  VerticalAlignment="Top"
@@ -85,11 +85,11 @@
         <Label x:Name="lblAmenidad"
                Content="Amenidad"
                HorizontalAlignment="Left"
-               Margin="25,282,0,0"
+               Margin="25,281,0,0"
                VerticalAlignment="Top" />
         <TextBox x:Name="txtAmenidad"
                  HorizontalAlignment="Left"
-                 Margin="116,286,0,0"
+                 Margin="116,285,0,0"
                  TextWrapping="Wrap"
                  Text=""
                  VerticalAlignment="Top"
@@ -105,64 +105,38 @@
         <Button x:Name="btnGuardarVilla"
                 Content="Guardar Villa"
                 HorizontalAlignment="Left"
-                Margin="30,329,0,0"
                 VerticalAlignment="Top"
-                Width="206"
-                Click="btnGuardarVilla_Click" />
-        <DataGrid x:Name="dgVilla"
-                  Margin="262,95,26,10"
-                  x:FieldModifier="public"
-                  AutoGenerateColumns="False">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="ID Villa"
-                                    Binding="{Binding Path=Id}"/>
-                <DataGridTextColumn Header="Nombre Villa"
-                                    Binding="{Binding Path=Nombre}"/>
-                <DataGridTextColumn Header="Detalle"
-                                    Binding="{Binding Path=Detalle}"/>
-                <DataGridTextColumn Header="Tarifa"
-                                    Binding="{Binding Path=Tarifa}"/>
-                <DataGridTextColumn Header="Ocupantes"
-                                    Binding="{Binding Path=Ocupantes}"/>
-                <DataGridTextColumn Header="m2"
-                                    Binding="{Binding Path=MetrosCuadrados}"/>
-                <DataGridTextColumn Header="Imagen"
-                                    Binding="{Binding Path=ImagenUrl}" />
-                <DataGridTextColumn Header="Amenidad"
-                                    Binding="{Binding Path=Amenidad}"/>
-                <DataGridTemplateColumn Header="Editar">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Click="btnEditarVilla"
-                                    Content="Editar Villa" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Eliminar">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Click="btnBorrarVilla"
-                                    Content="Eliminar" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
+                Width="200"
+                Click="btnGuardarVilla_Click"
+                Margin="36,325,0,0" />
         <Button x:Name="btnCargarVillas"
                 Content="Mostrar Todas las Villas"
                 HorizontalAlignment="Left"
-                Margin="542,65,0,0"
                 VerticalAlignment="Top"
-                RenderTransformOrigin="-3.485,0.132"
-                Width="250"
-                Click="btnCargarVillas_Click" />
+                Width="200"
+                Click="btnCargarVillas_Click"
+                Margin="381,10,0,0" />
         <Button x:Name="btnCargarVilla"
                 Content="Mostrar Villa por ID"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                Width="250"
-                Margin="262,65,0,0" 
-                Click="btnMostrarVillaID"/>
+                Width="200"
+                Click="btnMostrarVillaID"
+                Margin="586,10,0,0" />
+        <Button 
+                Content="Editar Villa"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Width="200"
+                Margin="176,10,0,0" 
+                Click="btnEditarVilla"/>
+        <Button 
+                Content="Eliminar"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Width="200"
+                Margin="36,358,0,0"
+                Click="btnBorrarVilla" />
         <Label x:Name="lblMensaje"
                Content=""
                HorizontalAlignment="Center"

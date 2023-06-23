@@ -1,9 +1,9 @@
 ﻿using MagicVillaUI.MVVM.Model;
-using MagicVillaUI.MVVM.ViewModel;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -93,13 +93,14 @@ namespace MagicVillaUI
             try
             {
                 lblMensaje.Content = "";
-                var respuesta = await client.GetStringAsync("Villa");
-                var villas = JsonConvert.DeserializeObject<List<Villa>>(respuesta);
-                dgVilla.DataContext = villas;
+                var respuesta = await client.GetAsync("Villa");
+                var json = await respuesta.Content.ReadAsStringAsync();
+                var villas = JsonConvert.DeserializeObject(json);
+                MessageBox.Show("Villas recuperadas: " + villas);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + ex.Message.ToString());
+                MessageBox.Show("Error: " + ex.Message);
             }
         }
 
@@ -107,15 +108,20 @@ namespace MagicVillaUI
         //PUT
         private void btnEditarVilla(object sender, RoutedEventArgs e)
         {
-            Villa? villa = ((FrameworkElement)sender).DataContext as Villa;
-            txtID.Text = villa.Id.ToString();
-            txtNombreVilla.Text = villa.Nombre;
-            txtDetalle.Text = villa.Detalle;
-            txtTarifa.Text = villa.Tarifa.ToString();
-            txtOcupantes.Text = villa.Ocupantes.ToString();
-            txtm2.Text = villa.MetrosCuadrados.ToString();
-            txtImagen.Text = villa.ImagenUrl;
-            txtAmenidad.Text = villa.Amenidad;
+            txtID.Visibility = Visibility.Visible;
+
+            if (txtID.Text != (0).ToString())
+            {
+                Villa? villa = ((FrameworkElement)sender).DataContext as Villa;
+                txtID.Text = villa.Id.ToString();
+                txtNombreVilla.Text = villa.Nombre;
+                txtDetalle.Text = villa.Detalle;
+                txtTarifa.Text = villa.Tarifa.ToString();
+                txtOcupantes.Text = villa.Ocupantes.ToString();
+                txtm2.Text = villa.MetrosCuadrados.ToString();
+                txtImagen.Text = villa.ImagenUrl;
+                txtAmenidad.Text = villa.Amenidad;
+            }
         }
 
         private async void PutVilla(Villa villa)
@@ -134,15 +140,25 @@ namespace MagicVillaUI
         //DELETE
         private void btnBorrarVilla(object sender, RoutedEventArgs e)
         {
-            Villa? villa = ((FrameworkElement)sender).DataContext as Villa;
-            this.DeleteVilla(villa.Id);
+            txtID.Visibility = Visibility.Visible;
+            lblMensaje.Content = "Escribe el ID de la villa a eliminar";
+            if (txtID.Text != (0).ToString())
+            {
+                var id = int.Parse(txtID.Text);
+                this.DeleteVilla(id);
+            }
+            else 
+            {
+                MessageBox.Show("El ID no puede ser 0.");
+            };
         }
 
         private async void DeleteVilla(int villaId)
         {
             try
             {
-                await client.DeleteAsync("Villa/id?id=" + villaId);
+                await client.DeleteAsync("Villa/" + villaId);
+                lblMensaje.Content = "Villa eliminada.";
             }
             catch (Exception ex)
             {
@@ -154,7 +170,7 @@ namespace MagicVillaUI
         private void btnMostrarVillaID(object sender, RoutedEventArgs e)
         {
             txtID.Visibility = Visibility.Visible;
-            if(txtID.Text != (0).ToString())
+            if (txtID.Text != (0).ToString())
             {
                 var id = int.Parse(txtID.Text);
                 this.GetVilla(id);
@@ -164,13 +180,13 @@ namespace MagicVillaUI
 
         private async void GetVilla(int villaId)
         {
-            Villa villaporId = new Villa();
             try
             {
                 lblMensaje.Content = "";
-                var respuesta = await client.GetStringAsync("Villa/id?id=" + villaId);
-                var villa = JsonConvert.DeserializeObject<Villa>(respuesta);
-                dgVilla.DataContext = villa;
+                var respuesta = await client.GetAsync("Villa/id?id=" + villaId);
+                var json = await respuesta.Content.ReadAsStringAsync();
+                var villa = JsonConvert.DeserializeObject(json);
+                MessageBox.Show("Villa:" + villa);
             }
             catch (Exception ex)
             {
