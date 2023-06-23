@@ -22,4 +22,3 @@ namespace MagicVillaUI.MVVM.Model
         public DateTime FechaActualizacion { get; set; }
     }
 }
-

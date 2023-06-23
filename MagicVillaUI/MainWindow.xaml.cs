@@ -26,6 +26,7 @@ namespace MagicVillaUI
         HttpClient client = new HttpClient();
         public MainWindow()
         {
+            HttpClientHandler handler = new HttpClientHandler();
             client.BaseAddress = new Uri("https://localhost:7100/api/");
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(
@@ -34,10 +35,11 @@ namespace MagicVillaUI
             InitializeComponent();
         }
 
+        //POST
         private void btnGuardarVilla_Click(object sender, RoutedEventArgs e)
         {
-            var villa = new Villa() 
-            { 
+            var villa = new Villa()
+            {
                 Id = Convert.ToInt32(txtID.Text),
                 Nombre = txtNombreVilla.Text,
                 Detalle = txtDetalle.Text,
@@ -48,7 +50,7 @@ namespace MagicVillaUI
                 Amenidad = txtAmenidad.Text
             };
 
-            if(villa.Id == 0)
+            if (villa.Id == 0)
             {
                 this.PostVilla(villa);
                 lblMensaje.Content = "Villa Guardada.";
@@ -68,6 +70,19 @@ namespace MagicVillaUI
             txtAmenidad.Text = "";
         }
 
+        private async void PostVilla(Villa villa)
+        {
+            try
+            {
+                await client.PostAsJsonAsync("villa", villa);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message.ToString());
+            }
+        }
+
+        //GET
         private void btnCargarVillas_Click(object sender, RoutedEventArgs e)
         {
             this.GetVillas();
@@ -78,56 +93,21 @@ namespace MagicVillaUI
             try
             {
                 lblMensaje.Content = "";
-                var respuesta = await client.GetStringAsync("Villa");
+                var respuesta = await client.GetStringAsync("villa");
                 var villas = JsonConvert.DeserializeObject<List<Villa>>(respuesta);
                 dgVilla.DataContext = villas;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + ex);
+                MessageBox.Show("Error: " + ex.Message.ToString());
             }
         }
 
-        private async void PostVilla(Villa villa)
-        {
-            try
-            {
-                await client.PostAsJsonAsync("Villa", villa);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + ex);
-            }
-        }
 
-        private async void PutVilla(Villa villa)
-        {
-            try
-            {
-                await client.PutAsJsonAsync("Villa/" + villa.Id, villa);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + ex);
-            }
-
-        }
-
-        private async void DeleteVilla(int villaId)
-        {
-            try
-            {
-                await client.DeleteAsync("Villa/" + villaId);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + ex);
-            }
-        }
-
+        //PUT
         private void btnEditarVilla(object sender, RoutedEventArgs e)
         {
-            Villa ?villa = ((FrameworkElement)sender).DataContext as Villa;
+            Villa? villa = ((FrameworkElement)sender).DataContext as Villa;
             txtID.Text = villa.Id.ToString();
             txtNombreVilla.Text = villa.Nombre;
             txtDetalle.Text = villa.Detalle;
@@ -138,10 +118,65 @@ namespace MagicVillaUI
             txtAmenidad.Text = villa.Amenidad;
         }
 
+        private async void PutVilla(Villa villa)
+        {
+            try
+            {
+                await client.PutAsJsonAsync("villa/" + villa.Id, villa);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message.ToString());
+            }
+
+        }
+
+        //DELETE
         private void btnBorrarVilla(object sender, RoutedEventArgs e)
         {
-            Villa ?villa = ((FrameworkElement)sender).DataContext as Villa;
+            Villa? villa = ((FrameworkElement)sender).DataContext as Villa;
             this.DeleteVilla(villa.Id);
+        }
+
+        private async void DeleteVilla(int villaId)
+        {
+            try
+            {
+                await client.DeleteAsync("Villa/" + villaId);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message.ToString());
+            }
+        }
+
+        //GET
+        private void btnMostrarVillaID(object sender, RoutedEventArgs e)
+        {
+            txtID.Visibility = Visibility.Visible;
+            var id = int.Parse(txtID.Text);
+            this.GetVilla(id);
+        }
+
+        private async void GetVilla(int villaId)
+        {
+            Villa villaporId = new Villa();
+            try
+            {
+                //lblMensaje.Content = "";
+                //var respuesta = await client.GetStringAsync("villa");
+                //var villas = JsonConvert.DeserializeObject<List<Villa>>(respuesta);
+                //dgVilla.DataContext = villas;
+
+                lblMensaje.Content = "";
+                var respuesta = await client.GetStringAsync("Villa/" + villaId);
+                var villa = JsonConvert.DeserializeObject<Villa>(respuesta);
+                dgVilla.DataContext = villa;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message.ToString());
+            }
         }
 
     }

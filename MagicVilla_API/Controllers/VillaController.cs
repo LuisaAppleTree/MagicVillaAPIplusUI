@@ -29,6 +29,7 @@ namespace MagicVilla_API.Controllers
             _response = new();
         }
 
+        //localhost:7100/api/Villa
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<APIResponse>> GetVillas()
@@ -49,6 +50,7 @@ namespace MagicVilla_API.Controllers
             return _response;
         }
 
+        //localhost:7100/api/Villa/id?id=3
         [HttpGet("id", Name = "GetVilla")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -85,6 +87,7 @@ namespace MagicVilla_API.Controllers
             return _response;
         }
 
+        //localhost:7100/api/Villa
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -125,6 +128,7 @@ namespace MagicVilla_API.Controllers
             return _response;
         }
 
+        //localhost:7100/api/Villa/6
         [HttpDelete("{id:int}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -161,6 +165,7 @@ namespace MagicVilla_API.Controllers
             return BadRequest( _response);
         }
 
+        //localhost:7100/api/Villa/3
         [HttpPut("{id:int}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -180,6 +185,7 @@ namespace MagicVilla_API.Controllers
             return Ok(_response);
         }
 
+        //localhost:7100/api/Villa/2
         [HttpPatch("{id:int}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

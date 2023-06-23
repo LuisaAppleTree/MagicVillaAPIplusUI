@@ -31,6 +31,7 @@ namespace MagicVilla_API.Controllers
             _response = new();
         }
 
+        //localhost:7100/api/NumeroVilla
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<APIResponse>> GetNumeroVillas()
@@ -51,6 +52,7 @@ namespace MagicVilla_API.Controllers
             return _response;
         }
 
+        //localhost:7100/api/NumeroVilla/id?id=301
         [HttpGet("id", Name = "GetNumeroVilla")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -87,6 +89,7 @@ namespace MagicVilla_API.Controllers
             return _response;
         }
 
+        //localhost:7100/api/NumeroVilla
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -132,6 +135,7 @@ namespace MagicVilla_API.Controllers
             return _response;
         }
 
+        //localhost:7100/api/NumeroVilla/301
         [HttpDelete("{id:int}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -168,6 +172,7 @@ namespace MagicVilla_API.Controllers
             return BadRequest( _response);
         }
 
+        //localhost:7100/api/NumeroVilla/101
         [HttpPut("{id:int}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
