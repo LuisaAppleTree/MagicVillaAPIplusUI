@@ -96,7 +96,8 @@ namespace MagicVillaUI
                 var respuesta = await client.GetAsync("Villa");
                 var json = await respuesta.Content.ReadAsStringAsync();
                 var villas = JsonConvert.DeserializeObject(json);
-                MessageBox.Show("Villas recuperadas: " + villas);
+                //MessageBox.Show("Villas recuperadas: " + villas);
+                txtBlockVilla.Text = "Villas recuperadas: " + villas;
             }
             catch (Exception ex)
             {
@@ -110,8 +111,11 @@ namespace MagicVillaUI
         {
             txtID.Visibility = Visibility.Visible;
 
+
             if (txtID.Text != (0).ToString())
             {
+                lblMensaje.Content = "Escribe el ID de la villa a editar";
+
                 Villa? villa = ((FrameworkElement)sender).DataContext as Villa;
                 txtID.Text = villa.Id.ToString();
                 txtNombreVilla.Text = villa.Nombre;
@@ -121,6 +125,10 @@ namespace MagicVillaUI
                 txtm2.Text = villa.MetrosCuadrados.ToString();
                 txtImagen.Text = villa.ImagenUrl;
                 txtAmenidad.Text = villa.Amenidad;
+            }
+            else
+            {
+                lblMensaje.Content = "El ID de la Villa no puede ser 0.";
             }
         }
 
@@ -134,7 +142,6 @@ namespace MagicVillaUI
             {
                 MessageBox.Show("Error: " + ex.Message.ToString());
             }
-
         }
 
         //DELETE
@@ -170,6 +177,7 @@ namespace MagicVillaUI
         private void btnMostrarVillaID(object sender, RoutedEventArgs e)
         {
             txtID.Visibility = Visibility.Visible;
+            lblMensaje.Content = "Escribe el ID de la villa que deseas visualizar.";
             if (txtID.Text != (0).ToString())
             {
                 var id = int.Parse(txtID.Text);
@@ -186,7 +194,8 @@ namespace MagicVillaUI
                 var respuesta = await client.GetAsync("Villa/id?id=" + villaId);
                 var json = await respuesta.Content.ReadAsStringAsync();
                 var villa = JsonConvert.DeserializeObject(json);
-                MessageBox.Show("Villa:" + villa);
+                //MessageBox.Show("Villa:" + villa);
+                txtBlockVilla.Text = "Villa recuperada: " + villa;
             }
             catch (Exception ex)
             {
