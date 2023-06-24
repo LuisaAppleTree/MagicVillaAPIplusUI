@@ -7,15 +7,16 @@
         mc:Ignorable="d"
         Title="MainWindow"
         Height="450"
-        Width="800">
+        Width="790">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Grid Background="Aqua">
+        <Grid Background="#FF90A9A9"
+              Margin="0,0,-27,0">
             <Label  x:Name="lblNombreVilla1"
                     Content="Nombre Villa:"
                     HorizontalAlignment="Left"
